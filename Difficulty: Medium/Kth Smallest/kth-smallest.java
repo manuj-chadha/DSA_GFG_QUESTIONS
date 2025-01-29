@@ -45,16 +45,16 @@ class GFG {
 class Solution {
     public static int kthSmallest(int[] arr, int k) {
         // Your code here
-        PriorityQueue<Integer> minHeap=new PriorityQueue<>();
-        for(int i: arr){
-            minHeap.add(i);
+        PriorityQueue<Integer> maxHeap=new PriorityQueue<>((a,b) -> (b-a));
+        for(int i=0;i<k;i++){
+            maxHeap.add(arr[i]);
         }
-        while(k>1){
-            if(!minHeap.isEmpty()){
-                minHeap.poll();
+        for(int i=k;i<arr.length;i++){
+            if(arr[i]<maxHeap.peek()){
+                maxHeap.poll();
+                maxHeap.add(arr[i]);
             }
-            k--;
         }
-        return minHeap.poll();
+        return maxHeap.poll();
     }
 }
