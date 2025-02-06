@@ -68,20 +68,19 @@ class Node {
 
 class Solution {
     public static Node buildTree(int inorder[], int preorder[]) {
-        // code here
         if(preorder.length==0){
             return null;
         }
-        int val=preorder[0];
         int index=0;
+        int val=preorder[0];
         for(int i=0;i<inorder.length;i++){
             if(inorder[i]==val){
                 index=i;
             }
         }
-        Node node=new Node(val);
-        node.left=buildTree(Arrays.copyOfRange(inorder, 0, index), Arrays.copyOfRange(preorder, 1, index+1));
-        node.right=buildTree(Arrays.copyOfRange(inorder, index+1, inorder.length), Arrays.copyOfRange(preorder, index+1, preorder.length));
-        return node;
+        Node root=new Node(val);
+        root.left=buildTree(Arrays.copyOfRange(inorder, 0, index), Arrays.copyOfRange(preorder, 1, index+1));
+        root.right=buildTree(Arrays.copyOfRange(inorder, index+1, inorder.length), Arrays.copyOfRange(preorder, index+1, preorder.length));
+        return root;
     }
 }
