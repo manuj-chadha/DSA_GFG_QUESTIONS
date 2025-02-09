@@ -32,7 +32,6 @@ public class Main {
 
 class Solution {
     public int findSubarray(int[] arr) {
-        // code here.
         int total=0;
         int sum=0;
         HashMap<Integer, Integer> map=new HashMap<>();
@@ -40,13 +39,9 @@ class Solution {
         for(int i=0;i<arr.length;i++){
             sum+=arr[i];
             if(map.containsKey(sum)){
-                int val=map.get(sum);
-                total+=val;
-                map.put(sum, val+1);
+                total+=map.get(sum);
             }
-            else{
-                map.put(sum, 1);
-            }
+            map.put(sum, map.getOrDefault(sum, 0)+1);
         }
         return total;
     }
