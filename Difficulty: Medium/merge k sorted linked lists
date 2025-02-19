@@ -1,0 +1,27 @@
+class Solution {
+    // Function to merge K sorted linked list.
+    public Node mergeKLists(List<Node> arr) {
+    PriorityQueue<Node> minHeap = new PriorityQueue<>((a, b) -> a.data - b.data);
+    
+    for (Node list : arr) {
+        if (list != null) {
+            minHeap.add(list);
+        }
+    }
+    
+    Node dummy = new Node(-1);
+    Node node = dummy;
+    
+    while (!minHeap.isEmpty()) {
+        Node smallest = minHeap.poll();
+        node.next = smallest;
+        node = node.next;
+        
+        if (smallest.next != null) {
+            minHeap.add(smallest.next);
+        }
+    }
+    
+    return dummy.next;
+}
+}
